@@ -13,7 +13,9 @@
 ## Usage
         - This app is used in a combination of ways.  It can run in the local browser after you spin up the static server through the terminal.  It can also be run through a heroku instance.
 ## Screenshot
-
+![Screenshot](images/noteHome.jpg)
+![Screenshot](images/savedNotes.jpg)
+![Screenshot](images/saveBtnNote.jpg)
 ## Credits
 
 ## License
