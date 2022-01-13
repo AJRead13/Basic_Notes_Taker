@@ -1,12 +1,13 @@
 const { randomUUID } = require('crypto');
 const express = require('express');
 const fs = require('fs');
+
 const router = express.Router();
 function readNotes() { 
-  return JSON.parse(fs.readFileSync('/db/db.json'))
+  return JSON.parse(fs.readFileSync('db/db.json'))
 }
 
-router.post('/api/notes', (req, res) => {
+router.post('/notes', (req, res) => {
     const notes = readNotes()
     const {title, text} = req.body;
     if (req.body) {
@@ -16,22 +17,22 @@ router.post('/api/notes', (req, res) => {
             id: randomUUID(),
         }
         notes.push(newNote);
-        fs.writeFileSync(notes, '/db/db.json');
+        fs.writeFileSync('db/db.json', JSON.stringify(notes));
     res.json(newNote)
     }else {
         res.error('Did not add Note')
     }
     
 })
-router.get('/api/notes', (req, res) => {
+router.get('/notes', (req, res) => {
     const notes = readNotes()
     res.json(notes);
 })
 
-router.delete('/api/notes/:id', (req, res) =>{
+router.delete('/notes/:id', (req, res) =>{
     const notes = readNotes();
     const updatedNotes = notes.filter(note => note.id !== req.params.id);
-    fs.writeFileSync(updatedNotes, '/db/db.json');
+    fs.writeFileSync('db/db.json', JSON.stringify(updatedNotes));
     res.json({ok: true})
 })
 
